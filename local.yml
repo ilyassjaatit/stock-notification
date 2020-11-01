@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./compose/local/laravel/Dockerfile
+    image: app
+    env_file:
+      - ./app/.env
+    ports:
+      - 9000:9000
+    volumes:
+      - ./app/:/var/www/app
+
+  nginx:
+    image: nginx:1.19.3-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./app/:/var/www/app/
+      - ./compose/local/nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
