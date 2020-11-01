@@ -11,6 +11,15 @@ services:
       - 9000:9000
     volumes:
       - ./app/:/var/www/app
+    networks:
+      - stock_notification
+
+  redis:
+    image: redis:6.0.9
+    ports:
+      - "6382:6379"
+    networks:
+      - stock_notification
 
   nginx:
     image: nginx:1.19.3-alpine
@@ -21,3 +30,26 @@ services:
       - ./compose/local/nginx:/etc/nginx/conf.d
     depends_on:
       - app
+    networks:
+      - stock_notification
+
+  postgresql:
+    image: postgres:12.4
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=stock_notification
+      - POSTGRES_PASSWORD=sdjfHsd73
+      - POSTGRES_DB=stock_notification_db
+    networks:
+      - stock_notification
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  stock_notification:
+    driver: bridge
