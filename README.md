@@ -12,6 +12,11 @@ Notify the stock movements
 ```
 
 ### Use Composer 
-````shell script
+```shell script
     docker-compose -f local.yml run --rm  app composer {command}
+```
+
+### Run tests 
+```shell script
+  docker-compose -f local.yml run --rm  app php artisan test
 ```
