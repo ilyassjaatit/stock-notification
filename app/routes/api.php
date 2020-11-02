@@ -18,4 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('products', \App\Http\Controllers\ProductController::class );
+Route::post('create-token', \App\Http\Controllers\UserTokenController::class);
+Route::resource('products', \App\Http\Controllers\ProductController::class )
+->middleware('auth:sanctum');
