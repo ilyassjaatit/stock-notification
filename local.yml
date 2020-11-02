@@ -9,6 +9,9 @@ services:
       - ./app/.env
     ports:
       - 9000:9000
+    depends_on:
+      - postgresql
+      - redis
     volumes:
       - ./app/:/var/www/app
     networks:
