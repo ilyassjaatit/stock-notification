@@ -53,7 +53,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        return $product->update($request->all());
+        $product->update($request->all());
+        return new ProductResource($product);
     }
 
     /**

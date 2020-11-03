@@ -30,17 +30,18 @@ class ProductControllerTest extends TestCase
 
     public function test_create_new_product()
     {
+
         $data = [
             'name' => 'Super new product',
             'price' => 236,
         ];
         $response = $this->postJson('/api/products', $data);
         $response->assertSuccessful();
-        #$response->assertHeader('content-type', 'application/json');
+        $response->assertHeader('content-type', 'application/json');
         $this->assertDatabaseHas('products', $data);
     }
 
-    public function _update_product()
+    public function test_update_product()
     {
         /** @var Product $product */
         $product = Product::factory()->create();
@@ -51,7 +52,6 @@ class ProductControllerTest extends TestCase
         ];
 
         $response = $this->patchJson("/api/products/{$product->getKey()}", $data);
-        dd($response);
         $response->assertSuccessful();
         $response->assertHeader('content-type', 'application/json');
     }

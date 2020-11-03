@@ -19,5 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('create-token', \App\Http\Controllers\UserTokenController::class);
-Route::resource('products', \App\Http\Controllers\ProductController::class )
-->middleware('auth:sanctum');
+Route::resource('products', \App\Http\Controllers\ProductController::class)
+    ->middleware('auth:sanctum');
+
+Route::resource('categories', \App\Http\Controllers\CategoryController::class )
+    ->middleware('auth:sanctum');
